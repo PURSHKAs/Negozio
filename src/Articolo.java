@@ -1,22 +1,30 @@
 
 public class Articolo {
 	private String IDArticolo;
-	private String Indumento ;
+	private String Nome ;
 	private String Taglia;
 	private String Colore;
 	private int Scorte;
 	private double Prezzo;
 	
-	public Articolo(String iDarticolo, String indumento, String taglia, String colore, int scorte, double prezzo) {
+	public Articolo(String iDarticolo, String nome, String taglia, String colore, int scorte, double prezzo) {
 		setIDArticolo(iDarticolo);
-		setIndumento(indumento);
+		setNome(nome);
 		setTaglia(taglia);
 		setColore(colore);
 		setScorte(scorte);
 		setPrezzo(prezzo);
 	}
 	
-	
+
+
+	public Articolo() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+
 	public String getIDArticolo() {
 		return IDArticolo;
 	}
@@ -25,12 +33,12 @@ public class Articolo {
 		IDArticolo = iDarticolo;
 	}
 
-	public String getIndumento() {
-		return Indumento;
+	public String getNome() {
+		return Nome;
 	}
 
-	public void setIndumento(String indumento) {
-		Indumento = indumento;
+	public void setNome(String nome) {
+		Nome = nome;
 	}
 
 	public String getTaglia() {
@@ -68,7 +76,7 @@ public class Articolo {
 	
 	@Override
 	public String toString() {
-		String s = IDArticolo + " " +Indumento+ " " +Taglia+ " " +Colore+ " " +Scorte+ " " +Prezzo;
+		String s = IDArticolo + " " +Nome+ " " +Taglia+ " " +Colore+ " " +Scorte+ " " +Prezzo;
 		return s;
 	}
 	
