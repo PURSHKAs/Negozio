@@ -2,7 +2,7 @@ package negozio;
 import java.util.*;
 import java.sql.*;
 
-public class ListaArticoliDAO{
+public class ListaArticoliDAO extends ListaArticoli{
 	
 	private Connection con;
 	
@@ -63,7 +63,7 @@ public class ListaArticoliDAO{
 		ArrayList<Articolo> ap = new ArrayList<Articolo>();
 		String query = null;
 		
-			query = "select * from articolo where ID=?";
+			query = "select * from articolo where idarticolo=?";
 		
 	try {
 		

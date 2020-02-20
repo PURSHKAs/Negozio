@@ -2,7 +2,7 @@ package negozio;
 	import java.sql.*;
 	import java.util.ArrayList;
 
-	public class ArticoloDAO {
+	public class ArticoloDAO extends Articolo{
 		
 		private Connection con;
 		
@@ -45,7 +45,7 @@ public ArrayList<Articolo> getArticoloByID(String id) {
 			Articolo A;
 			ArrayList<Articolo> ap = new ArrayList<Articolo>();
 			
-			String query = "select * from articolo where id=?";
+			String query = "select * from articolo where idarticolo=?";
 			
 			try {
 				PreparedStatement pst = con.prepareStatement(query);
@@ -93,7 +93,7 @@ public ArrayList<Articolo> getArticoloByID(String id) {
 		
 		
 		public void ModificaArticolo(String nome, String taglia, String colore, int scorte, double prezzo) {
-			String query = "UPDATE articolo SET nome=?, taglia=?, colore=?, scorta=? , prezzo=? WHERE id=?";
+			String query = "UPDATE articolo SET nome=?, taglia=?, colore=?, scorta=? , prezzo=? WHERE idarticolo=?";
 			try {
 				PreparedStatement pst = con.prepareStatement(query);
 				pst.setString(1, nome);

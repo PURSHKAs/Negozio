@@ -1,3 +1,4 @@
+package negozio;
 
 public class Articolo {
 	private String IDArticolo;
