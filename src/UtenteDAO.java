@@ -10,18 +10,17 @@ package negozio;
 			con = c;
 		}
 		
-		public ArrayList<Utente> getUtenteByNome(String Nome, String Cognome) {
+		public ArrayList<Utente> getUtenteByNome(String Nome) {
 			
 			ResultSet result;
 			Utente U;
 			ArrayList<Utente> au = new ArrayList<Utente>();
 			
-			String query = "select * from utente where nome=? && cognome=?";
+			String query = "select * from utente where nome=?";
 			
 			try {
 				PreparedStatement pst = con.prepareStatement(query);
 				pst.setString(1,Nome);
-				pst.setString(2, Cognome);
 				result = pst.executeQuery();
 				
 					while(result.next()) {
@@ -53,7 +52,7 @@ package negozio;
 				pst.setString(3, cellulare);
 				pst.setBoolean(4, status);
 				pst.setString(5, username);
-				pst.setString(5, password);
+				pst.setString(6, password);
 				pst.executeUpdate();
 			}catch(SQLException e) {e.printStackTrace();}
 		}
@@ -69,7 +68,7 @@ package negozio;
 		
 		
 		public void ModificaUtente(String nome, String cognome, String cellulare, boolean status, String username, String password) {
-			String query = "UPDATE username SET nome=?, cognome=?, cellulare=?, status=? , username=?, password=? WHERE idusername=?";
+			String query = "UPDATE utente SET nome=?, cognome=?, cellulare=?, status=? , username=?, password=? WHERE cellulare=?";
 			try {
 				PreparedStatement pst = con.prepareStatement(query);
 				pst.setString(1, nome);
@@ -78,6 +77,7 @@ package negozio;
 				pst.setBoolean(4, status);
 				pst.setString(5, username);
 				pst.setString(6, password);
+				pst.setString(7, cellulare);
 				pst.executeUpdate();
 			}catch(SQLException e) {e.printStackTrace();}
 		}
@@ -86,7 +86,7 @@ package negozio;
 			ResultSet result;
 			Utente U= new Utente();
 			
-			String query = "select * from utente where username=? && password=?";
+			String query = "select * from utente where username=? and password=?";
 			
 			try {
 				
@@ -95,16 +95,16 @@ package negozio;
 				pst.setString(2, password);
 				result = pst.executeQuery();
 				
-				U.setIDUtente(result.getString(1));
-				U.setNome(result.getString(2));
-				U.setCognome(result.getString(3));
-				U.setCellulare(result.getString(4));
-				U.setStatus(result.getBoolean(5));
-				U.setUsername(result.getString(6));
-				U.setPassword(result.getString(7));
-				
-				return U;
-				
+					while(result.next()) {
+						U.setIDUtente(result.getString(1));
+						U.setNome(result.getString(2));
+						U.setCognome(result.getString(3));
+						U.setCellulare(result.getString(4));
+						U.setStatus(result.getBoolean(5));
+						U.setUsername(result.getString(6));
+						U.setPassword(result.getString(7));
+					}
+					return U;
 			} catch (SQLException e) {
 				e.printStackTrace(); 
 				

@@ -12,6 +12,7 @@ public class Utente {
 	
 	
 	UtenteDAO UDAO;
+	Control TheController;
 	
 	
 	public Utente() {
@@ -26,20 +27,21 @@ public class Utente {
 		setCognome(cognome);
 		setCellulare(cellulare);
 		setStatus(status);
-		setPassword(password);
 		setUsername(username);
+		setPassword(password);
 		
 	}
 	
 	
 	
 	
-	public boolean Login(String username, String password) {
-		Utente U = UDAO.LoginDAO(username, password);
-		if(U==null) {
-			return false;
+	public Utente Login(String username, String password) {
+		Utente Logg = new Utente();
+		Logg = UDAO.LoginDAO(username, password);
+		if(Logg!=null) {
+			return Logg;
 		}else {
-			return true;
+			return null;
 		}
 	}
 	
@@ -86,7 +88,7 @@ public class Utente {
 		return Password;
 	}
 	public void setPassword(String password) {
-		this.Password = password;
+		Password = password;
 	}
 	@Override
 	public String toString() {

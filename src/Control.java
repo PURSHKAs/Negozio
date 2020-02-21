@@ -2,6 +2,7 @@ package negozio;
 import java.sql.*;
 import java.util.*;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 public class Control {
@@ -15,9 +16,10 @@ public class Control {
 	ListaArticoliDAO LADAO;
 	MainFrame mainFrame;
 	StoreFrame SF;
-	FornitoreFrame FF;
-	FornitoreDAO FDAO;
-	ListaFornitoriDAO LFDAO;
+	UtenteFrame UF;
+	UtenteDAO UDAO;
+	ListaUtentiDAO LUDAO;
+	LoginFrame LF;
 	Utente U;
 	
 	public Control() {
@@ -31,31 +33,42 @@ public class Control {
 			
 		} catch (SQLException | ClassNotFoundException e){e.printStackTrace();}
 		
+		LF = new LoginFrame(this);
 		ADAO = new ArticoloDAO(con);
 		LADAO = new ListaArticoliDAO(con);
+		LUDAO = new ListaUtentiDAO(con);
+		UDAO = new UtenteDAO(con);
 		mainFrame = new MainFrame(this);
-		FF = new FornitoreFrame(this);
+		UF = new UtenteFrame(this);
 		SF = new StoreFrame(this);
-		mainFrame.setVisible(true);
+		LF.setVisible(true);
 		
 	}
 	
-	public void FornitoreButton() {
-		FF.setVisible(true);
-		MostraFornitori();
+	public void UtenteFrame() {
+		UF.setVisible(true);
+		MostraUtenti();
 	}
 	public void StoreButton() {
 		SF.setVisible(true);
 		MostraArticoli();
 	}
+	public void MainframeAccess() {
+		mainFrame.setVisible(true);
+		LF.setVisible(false);
+	}
 	
-	public boolean LoginButton(String username, String password) {
-		if(U.Login(username, password)==true) {
-			return true;
+	public void LoginButton(String username, String password) {
+		Utente UN = new Utente();
+		UN =  UDAO.LoginDAO(username, password);
+		if(UN!=null) {
+			MainframeAccess();
 		}else {
-			return false;
+			JOptionPane.showMessageDialog(null,"MANNACC A MARONN SDM");
 		}
-		
+	}
+	public void ErroreLogin() {
+		LF.ErroreLogIn();
 	}
 	
 	public void RicercaArticolobyNome(String Nome) {
@@ -137,74 +150,75 @@ public class Control {
 		ADAO.ModificaArticolo(nome, taglia, colore, scorte1, prezzo1 );
 	}
 	
-	public void RicercaFornitorebyNome(String Nome) {
-		ArrayList<Fornitore> af = FDAO.getFornitoreByNome(Nome);
+	public void RicercaUtentebyNome(String Nome) {
+		ArrayList<Utente> af = UDAO.getUtenteByNome(Nome);
 		if(af.isEmpty())
-			System.out.println("Fornitore non trovato");
+			System.out.println("Utente non trovato");
 		else
-			for(Fornitore f: af) {
+			for(Utente f: af) {
 				System.out.println(f.toString());
 			}
 	}
 	
-	public void AggiungiFornitoriaLista(String nome, String pi, String sede) {
-		FDAO.AggiungiFornitore(nome, pi, sede);
+	public void AggiungiUtentiLista(String nome, String Cognome, String Cellulare, boolean Status, String username, String password) {
+		UDAO.AggiungiUtente(nome, Cognome, Cellulare, Status, username, password);
 	}
 	
-	public void RicercaFornitoribyID(String IDFornitore) {
-		ArrayList<Fornitore> af = FDAO.getFornitoreByID(IDFornitore);
-		if(af.isEmpty())
-			System.out.println("Fornitore non trovato");
-		else
-			MostraFornitori();
-	}
-	
-	public void MostraFornitori() {
-		ArrayList<Fornitore> ListaFornitori;
-		ListaFornitori = LFDAO.ListaFornitori();
-		DefaultTableModel model = (DefaultTableModel)FF.getTable().getModel();
-		Object[] row = new Object[5];
-		for(int i=0; i<ListaFornitori.size(); i++) {
-			row[0]=ListaFornitori.get(i).getIDFornitore();
-			row[1]=ListaFornitori.get(i).getNome();
-			row[2]=ListaFornitori.get(i).getPI();
-			row[3]=ListaFornitori.get(i).getSede();
+	public void MostraUtenti() {
+		ArrayList<Utente> ListaUtenti;
+		ListaUtenti = LUDAO.ListaUtenti();
+		DefaultTableModel model = (DefaultTableModel)UF.getTable().getModel();
+		Object[] row = new Object[7];
+		for(int i=0; i<ListaUtenti.size(); i++) {
+			row[0]=ListaUtenti.get(i).getIDUtente();
+			row[1]=ListaUtenti.get(i).getNome();
+			row[2]=ListaUtenti.get(i).getCognome();
+			row[3]=ListaUtenti.get(i).getCellulare();
+			row[4]=ListaUtenti.get(i).getStatus();
+			row[5]=ListaUtenti.get(i).getUsername();
+			row[6]=ListaUtenti.get(i).getPassword();
 			model.addRow(row);
 		}	
 	}
 	
-	public void MostraFornitoriByNome(String Nome) {
-		ArrayList<Fornitore> ListaFornitori = LFDAO.ListaFornitoribyNome(Nome);
-		DefaultTableModel model = (DefaultTableModel)FF.getTable().getModel();
-		Object[] row = new Object[6];
-		for(int i=0; i<ListaFornitori.size(); i++) {
-			row[0]=ListaFornitori.get(i).getIDFornitore();
-			row[1]=ListaFornitori.get(i).getNome();
-			row[2]=ListaFornitori.get(i).getPI();
-			row[3]=ListaFornitori.get(i).getSede();
+	public void MostraUtentiByNome(String Nome) {
+		ArrayList<Utente> ListaUtenti = LUDAO.ListaUtentibyNome(Nome);
+		DefaultTableModel model = (DefaultTableModel)UF.getTable().getModel();
+		Object[] row = new Object[7];
+		for(int i=0; i<ListaUtenti.size(); i++) {
+			row[0]=ListaUtenti.get(i).getIDUtente();
+			row[1]=ListaUtenti.get(i).getNome();
+			row[2]=ListaUtenti.get(i).getCognome();
+			row[3]=ListaUtenti.get(i).getCellulare();
+			row[4]=ListaUtenti.get(i).getStatus();
+			row[5]=ListaUtenti.get(i).getUsername();
+			row[6]=ListaUtenti.get(i).getPassword();
 			model.addRow(row);
 		}	
 	}
 	
-	public void MostraFornitoriByID(String IDFornitore) {
-		ArrayList<Fornitore> ListaFornitori = LFDAO.ListaFornitoribyID(IDFornitore);
-		DefaultTableModel model = (DefaultTableModel)FF.getTable().getModel();
-		Object[] row = new Object[6];
-		for(int i=0; i<ListaFornitori.size(); i++) {
-			row[0]=ListaFornitori.get(i).getIDFornitore();
-			row[1]=ListaFornitori.get(i).getNome();
-			row[2]=ListaFornitori.get(i).getPI();
-			row[3]=ListaFornitori.get(i).getSede();
+	public void MostraUtentiByID(String IDUtente) {
+		ArrayList<Utente> ListaUtenti = LUDAO.ListaUtentibyID(IDUtente);
+		DefaultTableModel model = (DefaultTableModel)UF.getTable().getModel();
+		Object[] row = new Object[7];
+		for(int i=0; i<ListaUtenti.size(); i++) {
+			row[0]=ListaUtenti.get(i).getIDUtente();
+			row[1]=ListaUtenti.get(i).getNome();
+			row[2]=ListaUtenti.get(i).getCognome();
+			row[3]=ListaUtenti.get(i).getCellulare();
+			row[4]=ListaUtenti.get(i).getStatus();
+			row[5]=ListaUtenti.get(i).getUsername();
+			row[6]=ListaUtenti.get(i).getPassword();
 			model.addRow(row);
 		}	
 	}
 	
-	public void RimuoviFornitore(int IDFornitore) {
-		FDAO.RimuoviFornitore(IDFornitore);
+	public void RimuoviUtente(int IDUtente) {
+		UDAO.RimuoviUtente(IDUtente);
 	}
 	
-	public void ModificaFornitore(String nome, String pi, String sede) {
-		FDAO.ModificaFornitore(nome, pi, sede);
+	public void ModificaUtente(String nome, String Cognome, String Cellulare, boolean Status, String Username, String password) {
+		UDAO.ModificaUtente(nome, Cognome, Cellulare, Status, Username, password);
 	}
 }
 
