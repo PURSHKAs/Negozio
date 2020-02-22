@@ -11,10 +11,6 @@ public class Utente {
 	private String Password;
 	
 	
-	UtenteDAO UDAO;
-	Control TheController;
-	
-	
 	public Utente() {
 		
 	}
@@ -31,20 +27,6 @@ public class Utente {
 		setPassword(password);
 		
 	}
-	
-	
-	
-	
-	public Utente Login(String username, String password) {
-		Utente Logg = new Utente();
-		Logg = UDAO.LoginDAO(username, password);
-		if(Logg!=null) {
-			return Logg;
-		}else {
-			return null;
-		}
-	}
-	
 	
 	
 	public String getIDUtente() {

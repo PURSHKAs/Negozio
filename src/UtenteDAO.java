@@ -6,10 +6,14 @@ package negozio;
 		
 		private Connection con;
 		
+		
 		public UtenteDAO(Connection c) {
 			con = c;
 		}
 		
+		/**
+		 * Fuzioni per la ricerca e la manipolazione dell'utente.
+		 */
 		public ArrayList<Utente> getUtenteByNome(String Nome) {
 			
 			ResultSet result;
@@ -41,7 +45,6 @@ package negozio;
 		}
 		
 
-		
 		public void AggiungiUtente(String nome, String cognome, String cellulare, boolean status, String username, String password){
 			String query = "INSERT INTO utente(nome, cognome, cellulare, status, username, password) VALUES (?,?,?,?,?,?)";
 			
@@ -57,16 +60,16 @@ package negozio;
 			}catch(SQLException e) {e.printStackTrace();}
 		}
 		
-		public void RimuoviUtente(int ID) {
+
+		public void RimuoviUtente(String ID) {
 			String query = "delete from utente where idutente = ?";
 			try {
 				PreparedStatement pst = con.prepareStatement(query);
-				pst.setInt(1, ID);
+				pst.setString(1, ID);
 				pst.executeUpdate();
 			}catch (SQLException e) {e.printStackTrace();}
 		}
-		
-		
+
 		public void ModificaUtente(String nome, String cognome, String cellulare, boolean status, String username, String password) {
 			String query = "UPDATE utente SET nome=?, cognome=?, cellulare=?, status=? , username=?, password=? WHERE cellulare=?";
 			try {
@@ -82,6 +85,7 @@ package negozio;
 			}catch(SQLException e) {e.printStackTrace();}
 		}
 		
+
 		public Utente LoginDAO(String username, String password) {
 			ResultSet result;
 			Utente U= new Utente();
@@ -94,6 +98,7 @@ package negozio;
 				pst.setString(1,username);
 				pst.setString(2, password);
 				result = pst.executeQuery();
+				if(result.next()) {
 				
 					while(result.next()) {
 						U.setIDUtente(result.getString(1));
@@ -105,6 +110,8 @@ package negozio;
 						U.setPassword(result.getString(7));
 					}
 					return U;
+			}
+					else return null;
 			} catch (SQLException e) {
 				e.printStackTrace(); 
 				

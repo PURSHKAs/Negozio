@@ -1,6 +1,4 @@
 package negozio;
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -39,13 +37,17 @@ public class StoreFrame extends JFrame {
 	private JTextField textFieldScorte;
 	private JTextField textFieldPrezzo;
 
+	
+	/**
+	 * Creazione del frame.
+	 */
 	@SuppressWarnings("serial")
 	public StoreFrame(Control c) {
 		setBackground(Color.GRAY);
 		
 		TheController = c;		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 700);
+		setBounds(100, 100, 621, 542);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.GRAY);
 		contentPane.setForeground(Color.BLACK);
@@ -54,6 +56,10 @@ public class StoreFrame extends JFrame {
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
 		
+		
+		/**
+		 * Bottone di modifica dell'articolo.
+		 */
 		JButton btnModificaArticolo = new JButton("Modifica Articolo");
 		btnModificaArticolo.setForeground(Color.WHITE);
 		btnModificaArticolo.setBackground(Color.BLACK);
@@ -75,6 +81,10 @@ public class StoreFrame extends JFrame {
 			}
 		});
 		
+		
+		/**
+		 * Bottone per la rimozione dell'articolo.
+		 */
 		JButton btnRimuoviArticolo = new JButton("Rimuovi Articolo");
 		btnRimuoviArticolo.setForeground(Color.WHITE);
 		btnRimuoviArticolo.setBackground(Color.BLACK);
@@ -84,7 +94,7 @@ public class StoreFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel model = (DefaultTableModel)table.getModel();
 				int selectedRowIndex = table.getSelectedRow();
-				TheController.RimuoviArticolo(Integer.parseInt( model.getValueAt(selectedRowIndex, 0).toString() ));
+				TheController.RimuoviArticolo((String) ( model.getValueAt(selectedRowIndex, 0) ));
 				model.setRowCount(0);
 				TheController.MostraArticoli();
 				textFieldNome.setText("");
@@ -96,6 +106,9 @@ public class StoreFrame extends JFrame {
 			}
 		});
 		
+		/**
+		 * Bottone per l'aggiuta di articoli.
+		 */
 		JButton btnAggiungiArticolo = new JButton("Aggiungi Articolo");
 		btnAggiungiArticolo.setForeground(Color.WHITE);
 		btnAggiungiArticolo.setBackground(Color.BLACK);
@@ -115,17 +128,22 @@ public class StoreFrame extends JFrame {
 				textFieldPrezzo.setText("");
 			}
 		});
-		btnAggiungiArticolo.setBounds(23, 590, 126, 43);
+		btnAggiungiArticolo.setBounds(12, 458, 126, 43);
 		contentPane.add(btnAggiungiArticolo);
-		btnRimuoviArticolo.setBounds(184, 590, 126, 43);
+		btnRimuoviArticolo.setBounds(173, 458, 126, 43);
 		contentPane.add(btnRimuoviArticolo);
-		btnModificaArticolo.setBounds(340, 590, 126, 43);
+		btnModificaArticolo.setBounds(329, 458, 126, 43);
 		contentPane.add(btnModificaArticolo);
 		
+		
+		/**
+		 * Tabella.
+		 */
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(23, 131, 333, 370);
+		scrollPane.setBounds(23, 76, 389, 370);
 		contentPane.add(scrollPane);
-///////////////////////////////////////////////////////////////////////////////////////////////////////		
+		
+		
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		table.addMouseListener(new MouseAdapter() {
@@ -153,11 +171,18 @@ public class StoreFrame extends JFrame {
 		)
 		{public boolean isCellEditable(int row, int column) {return false;}});
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////		
+
+		
+		
+		
+		/**
+		 * Box di ricerca + Radio.
+		 */
+		
 		
 		txtBoxCerca = new JTextField();
 		txtBoxCerca.setToolTipText("");
-		txtBoxCerca.setBounds(23, 67, 287, 27);
+		txtBoxCerca.setBounds(23, 12, 287, 27);
 		contentPane.add(txtBoxCerca);
 		txtBoxCerca.setColumns(10);
 		
@@ -165,18 +190,21 @@ public class StoreFrame extends JFrame {
 		JRadioButton rdbtnNome = new JRadioButton("Nome");
 		rdbtnNome.setBackground(Color.GRAY);
 		rdbtnNome.setForeground(Color.BLACK);
-		rdbtnNome.setBounds(141, 101, 71, 23);
+		rdbtnNome.setBounds(141, 46, 71, 23);
 		contentPane.add(rdbtnNome);
 		radioGroup.add(rdbtnNome);
 		rdbtnNome.setSelected(true);
 		
-		JRadioButton rdbtnid = new JRadioButton("id");
+		JRadioButton rdbtnid = new JRadioButton("ID");
 		rdbtnid.setBackground(Color.GRAY);
 		rdbtnid.setForeground(Color.BLACK);
-		rdbtnid.setBounds(217, 101, 82, 23);
+		rdbtnid.setBounds(217, 46, 82, 23);
 		contentPane.add(rdbtnid);
 		radioGroup.add(rdbtnid);
 		
+		/**
+		 * Bottone di ricerca.
+		 */
 		btnNewButton = new JButton("Cerca");
 		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.setBackground(Color.BLACK);
@@ -197,14 +225,18 @@ public class StoreFrame extends JFrame {
 					TheController.MostraArticoli();
 			}
 		});
-		btnNewButton.setBounds(330, 69, 82, 23);
+		btnNewButton.setBounds(330, 14, 82, 23);
 		contentPane.add(btnNewButton);
 		
 		JLabel lblRicercaPer = new JLabel("Ricerca per: ");
 		lblRicercaPer.setForeground(Color.BLACK);
-		lblRicercaPer.setBounds(46, 105, 83, 14);
+		lblRicercaPer.setBounds(46, 50, 83, 14);
 		contentPane.add(lblRicercaPer);
 		
+		
+		/**
+		 * Bottone per terminare il programma.
+		 */
 		JButton btnTermina = new JButton("Termina");
 		btnTermina.setForeground(Color.WHITE);
 		btnTermina.setBackground(Color.BLACK);
@@ -214,9 +246,12 @@ public class StoreFrame extends JFrame {
 				setVisible(false);
 			}
 		});
-		btnTermina.setBounds(573, 590, 126, 43);
+		btnTermina.setBounds(481, 458, 126, 43);
 		contentPane.add(btnTermina);
 		
+		/**
+		 * Bottone per il refresh della tabella.
+		 */
 		JButton btnRefresh = new JButton("Indietro");
 		btnRefresh.setForeground(Color.WHITE);
 		btnRefresh.setBackground(Color.BLACK);
@@ -228,59 +263,75 @@ public class StoreFrame extends JFrame {
 				TheController.MostraArticoli();
 			}
 		});
-		btnRefresh.setBounds(23, 524, 89, 23);
+		btnRefresh.setBounds(330, 46, 82, 23);
 		contentPane.add(btnRefresh);
+		
+		
 		
 		JLabel lblNewLabel = new JLabel("Nome");
 		lblNewLabel.setForeground(Color.BLACK);
-		lblNewLabel.setBounds(443, 150, 118, 14);
+		lblNewLabel.setBounds(426, 130, 118, 14);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblTaglia = new JLabel("Taglia");
 		lblTaglia.setForeground(Color.BLACK);
-		lblTaglia.setBounds(443, 204, 118, 14);
+		lblTaglia.setBounds(426, 184, 118, 14);
 		contentPane.add(lblTaglia);
 		
 		JLabel lblColore = new JLabel("Colore");
 		lblColore.setForeground(Color.BLACK);
-		lblColore.setBounds(443, 258, 118, 14);
+		lblColore.setBounds(424, 238, 118, 14);
 		contentPane.add(lblColore);
 		
 		JLabel lblScorta = new JLabel("Scorta");
 		lblScorta.setForeground(Color.BLACK);
-		lblScorta.setBounds(443, 313, 118, 14);
+		lblScorta.setBounds(424, 293, 118, 14);
 		contentPane.add(lblScorta);
 		
+		
+		
 		textFieldNome = new JTextField();
-		textFieldNome.setBounds(603, 150, 96, 20);
+		textFieldNome.setBounds(492, 130, 96, 20);
 		contentPane.add(textFieldNome);
 		textFieldNome.setColumns(10);
 		
 		textFieldTaglia = new JTextField();
 		textFieldTaglia.setColumns(10);
-		textFieldTaglia.setBounds(603, 201, 96, 20);
+		textFieldTaglia.setBounds(490, 181, 96, 20);
 		contentPane.add(textFieldTaglia);
 			
 		textFieldColore = new JTextField();
 		textFieldColore.setColumns(10);
-		textFieldColore.setBounds(603, 255, 96, 20);
+		textFieldColore.setBounds(490, 238, 96, 20);
 		contentPane.add(textFieldColore);
 		
 		textFieldScorte = new JTextField();
 		textFieldScorte.setColumns(10);
-		textFieldScorte.setBounds(603, 310, 96, 20);
+		textFieldScorte.setBounds(490, 293, 96, 20);
 		contentPane.add(textFieldScorte);
+		
+		
 		
 		JLabel lblPrezzo = new JLabel("Prezzo");
 		lblPrezzo.setForeground(Color.BLACK);
-		lblPrezzo.setBounds(443, 365, 48, 14);
+		lblPrezzo.setBounds(424, 345, 48, 14);
 		contentPane.add(lblPrezzo);
 		
 		textFieldPrezzo = new JTextField();
 		textFieldScorte.setColumns(10);
-		textFieldPrezzo.setBounds(603, 362, 96, 20);
+		textFieldPrezzo.setBounds(488, 345, 96, 20);
 		contentPane.add(textFieldPrezzo);
 		
+		JLabel label = new JLabel("PURSHKA's");
+		label.setForeground(Color.BLACK);
+		label.setFont(new Font("Tahoma", Font.PLAIN, 35));
+		label.setBounds(424, 17, 183, 58);
+		contentPane.add(label);
+		
+		
+		/**
+		 * docListener per l'aggiornamento dei bottoni.
+		 */
 		
 		
 		DocumentListener docListener = new DocumentListener() {
@@ -314,6 +365,10 @@ public class StoreFrame extends JFrame {
 		
 		textFieldNome.getDocument().addDocumentListener(docListener);
 		textFieldScorte.getDocument().addDocumentListener(docListener);
+		
+		/**
+		 * Listener per la tabella.
+		 */
 		
 		contentPane.addMouseListener(new MouseAdapter() {
 			@Override

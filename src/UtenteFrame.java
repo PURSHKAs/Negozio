@@ -40,13 +40,18 @@ public class UtenteFrame extends JFrame {
 	private JTextField textFieldUsername;
 	private JTextField textFieldPassword;
 
+	
+	/**
+	 * Creazione del frame.
+	 */
+	
 	@SuppressWarnings("serial")
 	public UtenteFrame(Control c) {
 		setBackground(Color.GRAY);
 		
 		TheController = c;		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 700);
+		setBounds(100, 100, 614, 551);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.GRAY);
 		contentPane.setForeground(Color.BLACK);
@@ -54,6 +59,10 @@ public class UtenteFrame extends JFrame {
 		setContentPane(contentPane);
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
+		
+		/**
+		 * Bottone di modifica dell'utente.
+		 */
 		
 		JButton btnModificaUtente = new JButton("Modifica Utente");
 		btnModificaUtente.setForeground(Color.WHITE);
@@ -80,6 +89,10 @@ public class UtenteFrame extends JFrame {
 			}
 		});
 		
+		
+		/**
+		 * Bottone per la rimozione dell'utente.
+		 */
 		JButton btnRimuoviUtente = new JButton("Rimuovi Utente");
 		btnRimuoviUtente.setForeground(Color.WHITE);
 		btnRimuoviUtente.setBackground(Color.BLACK);
@@ -89,7 +102,7 @@ public class UtenteFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel model = (DefaultTableModel)table.getModel();
 				int selectedRowIndex = table.getSelectedRow();
-				TheController.RimuoviUtente(Integer.parseInt( model.getValueAt(selectedRowIndex, 0).toString() ));
+				TheController.RimuoviUtente(( model.getValueAt(selectedRowIndex, 0).toString() ));
 				model.setRowCount(0);
 				TheController.MostraUtenti();
 				textFieldNome.setText("");
@@ -102,6 +115,10 @@ public class UtenteFrame extends JFrame {
 				JOptionPane.showMessageDialog(null, "Utente eliminato");
 			}
 		});
+		
+		/**
+		 * Bottone per l'aggiuta di utenti.
+		 */
 		
 		JButton btnAggiungiUtente = new JButton("Aggiungi Utente");
 		btnAggiungiUtente.setForeground(Color.WHITE);
@@ -125,19 +142,25 @@ public class UtenteFrame extends JFrame {
 				textFieldPassword.setText("");
 			}
 		});
-		btnAggiungiUtente.setBounds(23, 590, 126, 43);
+		btnAggiungiUtente.setBounds(10, 457, 126, 43);
 		contentPane.add(btnAggiungiUtente);
-		btnRimuoviUtente.setBounds(184, 590, 126, 43);
+		btnRimuoviUtente.setBounds(171, 457, 126, 43);
 		contentPane.add(btnRimuoviUtente);
-		btnModificaUtente.setBounds(340, 590, 126, 43);
+		btnModificaUtente.setBounds(327, 457, 126, 43);
 		contentPane.add(btnModificaUtente);
 		
+		
+		/**
+		 * Tabella.
+		 */
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(23, 131, 333, 370);
+		scrollPane.setBounds(23, 77, 379, 370);
 		contentPane.add(scrollPane);
-///////////////////////////////////////////////////////////////////////////////////////////////////////		
+
+	
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -154,6 +177,7 @@ public class UtenteFrame extends JFrame {
 				btnAggiungiUtente.setEnabled(false);
 			}
 		});
+		
 		table.setName("ShowContacsTableModel");
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -164,11 +188,15 @@ public class UtenteFrame extends JFrame {
 		)
 		{public boolean isCellEditable(int row, int column) {return false;}});
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////		
+		
+		
+		/**
+		 * Box di ricerca + Radio.
+		 */
 		
 		txtBoxCerca = new JTextField();
 		txtBoxCerca.setToolTipText("");
-		txtBoxCerca.setBounds(23, 67, 287, 27);
+		txtBoxCerca.setBounds(23, 10, 287, 27);
 		contentPane.add(txtBoxCerca);
 		txtBoxCerca.setColumns(10);
 		
@@ -176,7 +204,7 @@ public class UtenteFrame extends JFrame {
 		JRadioButton rdbtnNome = new JRadioButton("Nome");
 		rdbtnNome.setBackground(Color.GRAY);
 		rdbtnNome.setForeground(Color.BLACK);
-		rdbtnNome.setBounds(141, 101, 71, 23);
+		rdbtnNome.setBounds(141, 47, 71, 23);
 		contentPane.add(rdbtnNome);
 		radioGroup.add(rdbtnNome);
 		rdbtnNome.setSelected(true);
@@ -184,9 +212,14 @@ public class UtenteFrame extends JFrame {
 		JRadioButton rdbtnid = new JRadioButton("ID");
 		rdbtnid.setBackground(Color.GRAY);
 		rdbtnid.setForeground(Color.BLACK);
-		rdbtnid.setBounds(217, 101, 82, 23);
+		rdbtnid.setBounds(217, 47, 82, 23);
 		contentPane.add(rdbtnid);
 		radioGroup.add(rdbtnid);
+		
+		
+		/**
+		 * Bottone di ricerca.
+		 */
 		
 		btnNewButton = new JButton("Cerca");
 		btnNewButton.setForeground(Color.WHITE);
@@ -208,14 +241,18 @@ public class UtenteFrame extends JFrame {
 					TheController.MostraUtenti();
 			}
 		});
-		btnNewButton.setBounds(330, 69, 82, 23);
+		btnNewButton.setBounds(320, 11, 82, 23);
 		contentPane.add(btnNewButton);
 		
 		JLabel lblRicercaPer = new JLabel("Ricerca per: ");
 		lblRicercaPer.setForeground(Color.BLACK);
-		lblRicercaPer.setBounds(46, 105, 83, 14);
+		lblRicercaPer.setBounds(46, 51, 83, 14);
 		contentPane.add(lblRicercaPer);
 		
+		
+		/**
+		 * Bottone per terminare il programma.
+		 */
 		JButton btnTermina = new JButton("Termina");
 		btnTermina.setForeground(Color.WHITE);
 		btnTermina.setBackground(Color.BLACK);
@@ -226,8 +263,13 @@ public class UtenteFrame extends JFrame {
 				TheController.MainframeAccess();
 			}
 		});
-		btnTermina.setBounds(573, 590, 126, 43);
+		btnTermina.setBounds(471, 457, 126, 43);
 		contentPane.add(btnTermina);
+		
+		
+		/**
+		 * Bottone per il refresh della tabella.
+		 */
 		
 		JButton btnRefresh = new JButton("Indietro");
 		btnRefresh.setForeground(Color.WHITE);
@@ -240,68 +282,83 @@ public class UtenteFrame extends JFrame {
 				TheController.MostraUtenti();
 			}
 		});
-		btnRefresh.setBounds(23, 524, 89, 23);
+		btnRefresh.setBounds(320, 46, 82, 23);
 		contentPane.add(btnRefresh);
+		
 		
 		JLabel lblNewLabel = new JLabel("Nome");
 		lblNewLabel.setForeground(Color.BLACK);
-		lblNewLabel.setBounds(443, 150, 118, 14);
+		lblNewLabel.setBounds(412, 77, 118, 14);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblCognome = new JLabel("Cognome");
 		lblCognome.setForeground(Color.BLACK);
-		lblCognome.setBounds(443, 204, 118, 14);
+		lblCognome.setBounds(412, 127, 118, 14);
 		contentPane.add(lblCognome);
 		
 		JLabel lblCellulare = new JLabel("Cellulare");
 		lblCellulare.setForeground(Color.BLACK);
-		lblCellulare.setBounds(443, 258, 118, 14);
+		lblCellulare.setBounds(412, 185, 118, 14);
 		contentPane.add(lblCellulare);
 		
 		JLabel lblStatus = new JLabel("Status");
 		lblStatus.setForeground(Color.BLACK);
-		lblStatus.setBounds(443, 313, 118, 14);
+		lblStatus.setBounds(412, 240, 118, 14);
 		contentPane.add(lblStatus);
 		
+		
 		textFieldNome = new JTextField();
-		textFieldNome.setBounds(603, 150, 96, 20);
+		textFieldNome.setBounds(479, 77, 96, 20);
 		contentPane.add(textFieldNome);
 		textFieldNome.setColumns(10);
 		
 		textFieldCognome = new JTextField();
 		textFieldCognome.setColumns(10);
-		textFieldCognome.setBounds(603, 201, 96, 20);
+		textFieldCognome.setBounds(479, 125, 96, 20);
 		contentPane.add(textFieldCognome);
 			
 		textFieldCellulare = new JTextField();
 		textFieldCellulare.setColumns(10);
-		textFieldCellulare.setBounds(603, 255, 96, 20);
+		textFieldCellulare.setBounds(479, 179, 96, 20);
 		contentPane.add(textFieldCellulare);
 		
 		textFieldStatus = new JTextField();
 		textFieldStatus.setColumns(10);
-		textFieldStatus.setBounds(603, 310, 96, 20);
+		textFieldStatus.setBounds(478, 234, 96, 20);
 		contentPane.add(textFieldStatus);
+		
 		
 		JLabel lblUsername = new JLabel("Username");
 		lblUsername.setForeground(Color.BLACK);
-		lblUsername.setBounds(443, 365, 48, 14);
+		lblUsername.setBounds(412, 292, 70, 14);
 		contentPane.add(lblUsername);
 		
 		textFieldUsername = new JTextField();
 		textFieldStatus.setColumns(10);
-		textFieldUsername.setBounds(603, 362, 96, 20);
+		textFieldUsername.setBounds(478, 286, 96, 20);
 		contentPane.add(textFieldUsername);
+		
 		
 		JLabel lblPassword = new JLabel("Password");
 		lblPassword.setForeground(Color.BLACK);
-		lblPassword.setBounds(443, 419, 48, 14);
+		lblPassword.setBounds(412, 346, 70, 14);
 		contentPane.add(lblPassword);
 		
 		textFieldPassword = new JTextField();
-		textFieldPassword.setBounds(603, 416, 96, 20);
+		textFieldPassword.setBounds(478, 340, 96, 20);
 		contentPane.add(textFieldPassword);
 		
+		
+		JLabel lblPurshkas = new JLabel("PURSHKA's");
+		lblPurshkas.setFont(new Font("Tahoma", Font.PLAIN, 35));
+		lblPurshkas.setForeground(Color.BLACK);
+		lblPurshkas.setBounds(414, 10, 183, 58);
+		contentPane.add(lblPurshkas);
+		
+		
+		/**
+		 * docListener per l'aggiornamento dei bottoni.
+		 */
 		
 		
 		DocumentListener docListener = new DocumentListener() {
@@ -336,6 +393,10 @@ public class UtenteFrame extends JFrame {
 		textFieldNome.getDocument().addDocumentListener(docListener);
 		textFieldStatus.getDocument().addDocumentListener(docListener);
 		
+		
+		/**
+		 * Listener per la tabella.
+		 */
 		contentPane.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

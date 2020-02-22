@@ -10,6 +10,10 @@ public class ListaUtentiDAO extends ListaUtenti{
 		con = c;
 	}
 	
+	
+	/**
+	 * Fuzioni per la ricerca e la manipolazione della lista utenti.
+	 */
 	public ArrayList<Utente> ListaUtenti(){
 		
 			ResultSet result;

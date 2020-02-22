@@ -10,6 +10,10 @@ public class ListaArticoliDAO extends ListaArticoli{
 		con = c;
 	}
 	
+	/**
+	 * Fuzioni per la ricerca e la manipolazione della lista articoli.
+	 */
+	
 	public ArrayList<Articolo> ListaArticoli(){
 		
 			ResultSet result;

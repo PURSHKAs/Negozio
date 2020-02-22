@@ -27,15 +27,12 @@ public class LoginFrame extends JFrame {
 	private JPasswordField passwordField;
 
 	/**
-	 * Launch the application.
-	 */
-	/**
-	 * Create the frame.
+	 * Creazione del frame.
 	 */
 	public LoginFrame(Control C) {
 		TheController = C;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 443, 625);
+		setBounds(100, 100, 443, 380);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -43,6 +40,9 @@ public class LoginFrame extends JFrame {
 		setLocationRelativeTo(null);
 		contentPane.setLayout(null);
 		
+		/**
+		 * Bottone di submit.
+		 */
 		JButton btnLogin = new JButton("LOGIN");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -62,38 +62,39 @@ public class LoginFrame extends JFrame {
 		btnLogin.setFont(new Font("Dialog", Font.BOLD, 38));
 		btnLogin.setForeground(Color.WHITE);
 		btnLogin.setBackground(new Color(0, 0, 0));
-		btnLogin.setBounds(103, 454, 227, 89);
+		btnLogin.setBounds(96, 228, 227, 89);
 		contentPane.add(btnLogin);
 		
 		JLabel lblUsername = new JLabel("USERNAME");
 		lblUsername.setForeground(Color.BLACK);
 		lblUsername.setFont(new Font("Dialog", Font.BOLD, 24));
-		lblUsername.setBounds(139, 162, 149, 52);
+		lblUsername.setBounds(139, 84, 149, 52);
 		contentPane.add(lblUsername);
 		
 		JLabel lblPursha = new JLabel("PURSHKA'S");
 		lblPursha.setBackground(Color.BLACK);
 		lblPursha.setFont(new Font("Dialog", Font.BOLD, 65));
 		lblPursha.setForeground(Color.BLACK);
-		lblPursha.setBounds(24, 38, 405, 136);
+		lblPursha.setBounds(22, 12, 384, 83);
 		contentPane.add(lblPursha);
 		
 		JLabel lblPassword = new JLabel("PASSWORD");
 		lblPassword.setForeground(Color.BLACK);
 		lblPassword.setFont(new Font("Dialog", Font.BOLD, 24));
-		lblPassword.setBounds(139, 300, 149, 52);
+		lblPassword.setBounds(139, 147, 149, 52);
 		contentPane.add(lblPassword);
 		
 		textFieldUsername = new JTextField();
-		textFieldUsername.setBounds(52, 214, 317, 42);
+		textFieldUsername.setBounds(118, 125, 181, 25);
 		contentPane.add(textFieldUsername);
 		textFieldUsername.setColumns(10);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(52, 361, 317, 42);
+		passwordField.setBounds(118, 191, 181, 25);
 		contentPane.add(passwordField);
 	}
 	
+
 	public void ErroreLogIn() {
 		JOptionPane.showMessageDialog(null, "CREDENZIALI INVALIDE", "INSERIRE CREDENZIALI", JOptionPane.ERROR_MESSAGE);
 		textFieldUsername.setText(null);

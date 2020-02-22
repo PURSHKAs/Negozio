@@ -10,6 +10,10 @@ package negozio;
 			con = c;
 		}
 		
+		/**
+		 * Fuzioni per la ricerca e la manipolazione dell'articolo.
+		 */
+		
 		public ArrayList<Articolo> getArticoloByNome(String Nome) {
 			
 			ResultSet result;
@@ -39,6 +43,7 @@ package negozio;
 
 		}
 		
+
 public ArrayList<Articolo> getArticoloByID(String id) {
 			
 			ResultSet result;
@@ -82,11 +87,11 @@ public ArrayList<Articolo> getArticoloByID(String id) {
 			}catch(SQLException e) {e.printStackTrace();}
 		}
 		
-		public void RimuoviArticolo(int ID) {
+		public void RimuoviArticolo(String ID) {
 			String query = "delete from articolo where idarticolo = ?";
 			try {
 				PreparedStatement pst = con.prepareStatement(query);
-				pst.setInt(1, ID);
+				pst.setString(1, ID);
 				pst.executeUpdate();
 			}catch (SQLException e) {e.printStackTrace();}
 		}

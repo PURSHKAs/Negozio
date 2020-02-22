@@ -6,7 +6,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 public class Control {
-
+	
+	
+	/**
+	 * MAIN.
+	 */
 	public static void main(String[] args) {
 		Control c = new Control();
 		
@@ -22,6 +26,10 @@ public class Control {
 	LoginFrame LF;
 	Utente U;
 	
+	/**
+	 * Costruttore.
+	 */
+	
 	public Control() {
 		Connection con = null;
 		
@@ -33,6 +41,8 @@ public class Control {
 			
 		} catch (SQLException | ClassNotFoundException e){e.printStackTrace();}
 		
+		
+		
 		LF = new LoginFrame(this);
 		ADAO = new ArticoloDAO(con);
 		LADAO = new ListaArticoliDAO(con);
@@ -43,7 +53,8 @@ public class Control {
 		SF = new StoreFrame(this);
 		LF.setVisible(true);
 		
-	}
+		}
+	
 	
 	public void UtenteFrame() {
 		UF.setVisible(true);
@@ -58,19 +69,29 @@ public class Control {
 		LF.setVisible(false);
 	}
 	
+	/**
+	 * Funzione di login.
+	 */
 	public void LoginButton(String username, String password) {
-		Utente UN = new Utente();
+		Utente UN;
 		UN =  UDAO.LoginDAO(username, password);
 		if(UN!=null) {
 			MainframeAccess();
 		}else {
-			JOptionPane.showMessageDialog(null,"MANNACC A MARONN SDM");
+			JOptionPane.showMessageDialog(null,"Errore, credenziali invalide!!!");
 		}
 	}
+	
+	
 	public void ErroreLogin() {
 		LF.ErroreLogIn();
 	}
 	
+	
+	
+	/**
+	 * Funzioni per l'articolo.
+	 */
 	public void RicercaArticolobyNome(String Nome) {
 		ArrayList<Articolo> ap = ADAO.getArticoloByNome(Nome);
 		if(ap.isEmpty())
@@ -87,6 +108,7 @@ public class Control {
 		ADAO.AggiungiArticolo(nome, taglia, colore, scorte1, prezzo1);
 	}
 	
+	
 	public void RicercaArticolibyID(String IDArticolo) {
 		ArrayList<Articolo> ap = ADAO.getArticoloByID(IDArticolo);
 		if(ap.isEmpty())
@@ -94,6 +116,7 @@ public class Control {
 		else
 			MostraArticoli();
 	}
+	
 	
 	public void MostraArticoli() {
 		ArrayList<Articolo> ListaArticoli = LADAO.ListaArticoli();
@@ -110,6 +133,8 @@ public class Control {
 		}	
 	}
 	
+	
+	
 	public void MostraArticoliByNome(String Nome) {
 		ArrayList<Articolo> ListaArticoli = LADAO.ListaArticolibyNome(Nome);
 		DefaultTableModel model = (DefaultTableModel)SF.getTable().getModel();
@@ -124,6 +149,8 @@ public class Control {
 			model.addRow(row);
 		}	
 	}
+	
+	
 	
 	public void MostraArticoliByID(String IDArticolo) {
 		ArrayList<Articolo> ListaArticoli = LADAO.ListaArticolibyID(IDArticolo);
@@ -140,7 +167,7 @@ public class Control {
 		}	
 	}
 	
-	public void RimuoviArticolo(int IDArticolo) {
+	public void RimuoviArticolo(String IDArticolo) {
 		ADAO.RimuoviArticolo(IDArticolo);
 	}
 	
@@ -149,6 +176,11 @@ public class Control {
 		double prezzo1 = Double.parseDouble(prezzo);
 		ADAO.ModificaArticolo(nome, taglia, colore, scorte1, prezzo1 );
 	}
+	
+	
+	/**
+	 * Funzioni per l'utente.
+	 */
 	
 	public void RicercaUtentebyNome(String Nome) {
 		ArrayList<Utente> af = UDAO.getUtenteByNome(Nome);
@@ -160,9 +192,11 @@ public class Control {
 			}
 	}
 	
+	
 	public void AggiungiUtentiLista(String nome, String Cognome, String Cellulare, boolean Status, String username, String password) {
 		UDAO.AggiungiUtente(nome, Cognome, Cellulare, Status, username, password);
 	}
+	
 	
 	public void MostraUtenti() {
 		ArrayList<Utente> ListaUtenti;
@@ -213,7 +247,7 @@ public class Control {
 		}	
 	}
 	
-	public void RimuoviUtente(int IDUtente) {
+	public void RimuoviUtente(String IDUtente) {
 		UDAO.RimuoviUtente(IDUtente);
 	}
 	
