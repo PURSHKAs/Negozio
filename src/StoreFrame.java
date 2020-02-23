@@ -36,6 +36,7 @@ public class StoreFrame extends JFrame {
 	private JTextField textFieldColore;
 	private JTextField textFieldScorte;
 	private JTextField textFieldPrezzo;
+	private JTextField textField_1;
 
 	
 	/**
@@ -47,7 +48,7 @@ public class StoreFrame extends JFrame {
 		
 		TheController = c;		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 621, 542);
+		setBounds(100, 100, 625, 504);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.GRAY);
 		contentPane.setForeground(Color.BLACK);
@@ -71,7 +72,7 @@ public class StoreFrame extends JFrame {
 				DefaultTableModel model = (DefaultTableModel)table.getModel();
 				int selectedRowIndex = table.getSelectedRow();
 				TheController.ModificaArticolo(textFieldNome.getText(), textFieldTaglia.getText(), 
-						textFieldColore.getText(), textFieldScorte.getText(), textFieldPrezzo.getText());
+						textFieldColore.getText(), textFieldScorte.getText(), textFieldPrezzo.getText(), (String) ( model.getValueAt(selectedRowIndex, 0) ));
 				model.setRowCount(0);
 				TheController.MostraArticoli();
 				textFieldNome.setText("");
@@ -128,11 +129,11 @@ public class StoreFrame extends JFrame {
 				textFieldPrezzo.setText("");
 			}
 		});
-		btnAggiungiArticolo.setBounds(12, 458, 126, 43);
+		btnAggiungiArticolo.setBounds(295, 416, 126, 43);
 		contentPane.add(btnAggiungiArticolo);
-		btnRimuoviArticolo.setBounds(173, 458, 126, 43);
+		btnRimuoviArticolo.setBounds(157, 416, 126, 43);
 		contentPane.add(btnRimuoviArticolo);
-		btnModificaArticolo.setBounds(329, 458, 126, 43);
+		btnModificaArticolo.setBounds(19, 416, 126, 43);
 		contentPane.add(btnModificaArticolo);
 		
 		
@@ -140,7 +141,7 @@ public class StoreFrame extends JFrame {
 		 * Tabella.
 		 */
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(23, 76, 389, 370);
+		scrollPane.setBounds(23, 76, 389, 296);
 		contentPane.add(scrollPane);
 		
 		
@@ -190,7 +191,7 @@ public class StoreFrame extends JFrame {
 		JRadioButton rdbtnNome = new JRadioButton("Nome");
 		rdbtnNome.setBackground(Color.GRAY);
 		rdbtnNome.setForeground(Color.BLACK);
-		rdbtnNome.setBounds(141, 46, 71, 23);
+		rdbtnNome.setBounds(98, 45, 71, 23);
 		contentPane.add(rdbtnNome);
 		radioGroup.add(rdbtnNome);
 		rdbtnNome.setSelected(true);
@@ -198,7 +199,7 @@ public class StoreFrame extends JFrame {
 		JRadioButton rdbtnid = new JRadioButton("ID");
 		rdbtnid.setBackground(Color.GRAY);
 		rdbtnid.setForeground(Color.BLACK);
-		rdbtnid.setBounds(217, 46, 82, 23);
+		rdbtnid.setBounds(159, 45, 82, 23);
 		contentPane.add(rdbtnid);
 		radioGroup.add(rdbtnid);
 		
@@ -230,7 +231,7 @@ public class StoreFrame extends JFrame {
 		
 		JLabel lblRicercaPer = new JLabel("Ricerca per: ");
 		lblRicercaPer.setForeground(Color.BLACK);
-		lblRicercaPer.setBounds(46, 50, 83, 14);
+		lblRicercaPer.setBounds(19, 51, 83, 14);
 		contentPane.add(lblRicercaPer);
 		
 		
@@ -246,7 +247,7 @@ public class StoreFrame extends JFrame {
 				setVisible(false);
 			}
 		});
-		btnTermina.setBounds(481, 458, 126, 43);
+		btnTermina.setBounds(433, 416, 126, 43);
 		contentPane.add(btnTermina);
 		
 		/**
@@ -270,56 +271,56 @@ public class StoreFrame extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("Nome");
 		lblNewLabel.setForeground(Color.BLACK);
-		lblNewLabel.setBounds(426, 130, 118, 14);
+		lblNewLabel.setBounds(426, 76, 118, 14);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblTaglia = new JLabel("Taglia");
 		lblTaglia.setForeground(Color.BLACK);
-		lblTaglia.setBounds(426, 184, 118, 14);
+		lblTaglia.setBounds(426, 130, 118, 14);
 		contentPane.add(lblTaglia);
 		
 		JLabel lblColore = new JLabel("Colore");
 		lblColore.setForeground(Color.BLACK);
-		lblColore.setBounds(424, 238, 118, 14);
+		lblColore.setBounds(424, 184, 118, 14);
 		contentPane.add(lblColore);
 		
 		JLabel lblScorta = new JLabel("Scorta");
 		lblScorta.setForeground(Color.BLACK);
-		lblScorta.setBounds(424, 293, 118, 14);
+		lblScorta.setBounds(424, 239, 118, 14);
 		contentPane.add(lblScorta);
 		
 		
 		
 		textFieldNome = new JTextField();
-		textFieldNome.setBounds(492, 130, 96, 20);
+		textFieldNome.setBounds(492, 76, 96, 20);
 		contentPane.add(textFieldNome);
 		textFieldNome.setColumns(10);
 		
 		textFieldTaglia = new JTextField();
 		textFieldTaglia.setColumns(10);
-		textFieldTaglia.setBounds(490, 181, 96, 20);
+		textFieldTaglia.setBounds(490, 127, 96, 20);
 		contentPane.add(textFieldTaglia);
 			
 		textFieldColore = new JTextField();
 		textFieldColore.setColumns(10);
-		textFieldColore.setBounds(490, 238, 96, 20);
+		textFieldColore.setBounds(490, 184, 96, 20);
 		contentPane.add(textFieldColore);
 		
 		textFieldScorte = new JTextField();
 		textFieldScorte.setColumns(10);
-		textFieldScorte.setBounds(490, 293, 96, 20);
+		textFieldScorte.setBounds(490, 239, 96, 20);
 		contentPane.add(textFieldScorte);
 		
 		
 		
 		JLabel lblPrezzo = new JLabel("Prezzo");
 		lblPrezzo.setForeground(Color.BLACK);
-		lblPrezzo.setBounds(424, 345, 48, 14);
+		lblPrezzo.setBounds(424, 291, 48, 14);
 		contentPane.add(lblPrezzo);
 		
 		textFieldPrezzo = new JTextField();
 		textFieldScorte.setColumns(10);
-		textFieldPrezzo.setBounds(488, 345, 96, 20);
+		textFieldPrezzo.setBounds(488, 291, 96, 20);
 		contentPane.add(textFieldPrezzo);
 		
 		JLabel label = new JLabel("PURSHKA's");
@@ -327,6 +328,34 @@ public class StoreFrame extends JFrame {
 		label.setFont(new Font("Tahoma", Font.PLAIN, 35));
 		label.setBounds(424, 17, 183, 58);
 		contentPane.add(label);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(196, 384, 98, 20);
+		contentPane.add(textField_1);
+		
+		JLabel lblQuantit = new JLabel("Quantit\u00E0");
+		lblQuantit.setBounds(141, 386, 54, 16);
+		contentPane.add(lblQuantit);
+		
+		JButton btnVenduto = new JButton("Venduto");
+		btnVenduto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				DefaultTableModel model = (DefaultTableModel)table.getModel();
+				int selectedRowIndex = table.getSelectedRow();
+				int tmp =Integer.parseInt(textFieldScorte.getText());
+				int tmp1=Integer.parseInt(textField_1.getText());
+				TheController.VendiArticolo(textFieldNome.getText(), textFieldTaglia.getText(), 
+						textFieldColore.getText(),tmp, textFieldPrezzo.getText(),(String) ( model.getValueAt(selectedRowIndex, 0) ), tmp1);
+				model.setRowCount(0);
+				TheController.MostraArticoli();
+				textField_1.setText("");
+			}
+		});
+		btnVenduto.setForeground(Color.BLACK);
+		btnVenduto.setBackground(Color.RED);
+		btnVenduto.setBounds(306, 381, 99, 26);
+		contentPane.add(btnVenduto);
 		
 		
 		/**
@@ -352,7 +381,7 @@ public class StoreFrame extends JFrame {
 			}
 			
 			public void changed() {
-				if((textFieldNome.getText()).length()<3 || (textFieldScorte.getText()).length()<2) {
+				if((textFieldNome.getText()).length()<3 || (textFieldScorte.getText()).length()<1) {
 					btnModificaArticolo.setEnabled(false);
 					btnAggiungiArticolo.setEnabled(false);
 				}

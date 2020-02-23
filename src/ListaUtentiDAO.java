@@ -29,7 +29,7 @@ public class ListaUtentiDAO extends ListaUtenti{
 			
 			while(result.next())
 			{
-				A = new Utente(result.getString("idutente"), result.getString("nome"), result.getString("cognome"), result.getString("cellulare"), result.getBoolean("status"), result.getString("username"), result.getString("password"));
+				A = new Utente(result.getString("idutente"), result.getString("nome"), result.getString("cognome"), result.getString("cellulare"), result.getString("username"), result.getString("password"));
 				ap.add(A);
 			}
 		} catch (SQLException e ) {e.printStackTrace();}
@@ -53,7 +53,7 @@ public class ListaUtentiDAO extends ListaUtenti{
 		
 		while(result.next())
 		{
-			A = new Utente(result.getString("idutente"), result.getString("nome"), result.getString("cognome"), result.getString("cellulare"), result.getBoolean("status"), result.getString("username"), result.getString("password"));
+			A = new Utente(result.getString("idutente"), result.getString("nome"), result.getString("cognome"), result.getString("cellulare"), result.getString("username"), result.getString("password"));
 			ap.add(A);
 		}
 	} catch (SQLException e ) {e.printStackTrace();}
@@ -77,7 +77,7 @@ public ArrayList<Utente> ListaUtentibyID(String ID){
 		
 		while(result.next())
 		{
-			A = new Utente(result.getString("idutente"), result.getString("nome"), result.getString("cognome"), result.getString("cellulare"), result.getBoolean("status"), result.getString("username"), result.getString("password"));
+			A = new Utente(result.getString("idutente"), result.getString("nome"), result.getString("cognome"), result.getString("cellulare"), result.getString("username"), result.getString("password"));
 			ap.add(A);
 		}
 	} catch (SQLException e ) {e.printStackTrace();}

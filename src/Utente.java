@@ -6,7 +6,6 @@ public class Utente {
 	private String Nome;
 	private String Cognome;
 	private String Cellulare;
-	private boolean Status;
 	private String Username;
 	private String Password;
 	
@@ -16,19 +15,20 @@ public class Utente {
 	}
 	
 
-	public Utente(String iDUtente, String nome, String cognome, String cellulare, boolean status, String username, String password) {
+	public Utente(String iDUtente, String nome, String cognome, String cellulare, String username, String password) {
 		super();
 		setIDUtente(iDUtente);
 		setNome(nome);
 		setCognome(cognome);
 		setCellulare(cellulare);
-		setStatus(status);
 		setUsername(username);
 		setPassword(password);
 		
 	}
-	
-	
+
+
+
+
 	public String getIDUtente() {
 		return IDUtente;
 	}
@@ -53,12 +53,6 @@ public class Utente {
 	public void setCellulare(String cellulare) {
 		Cellulare = cellulare;
 	}
-	public boolean getStatus() {
-		return Status;
-	}
-	public void setStatus(boolean status) {
-		Status = status;
-	}
 	
 	public String getUsername() {
 		return Username;
@@ -74,8 +68,7 @@ public class Utente {
 	}
 	@Override
 	public String toString() {
-		return "Utente [IDUtente=" + IDUtente + ", Nome=" + Nome + ", Cognome=" + Cognome + ", Cellulare=" + Cellulare
-				+ ", Status=" + Status + "]";
+		return "Utente [IDUtente=" + IDUtente + ", Nome=" + Nome + ", Cognome=" + Cognome + ", Cellulare=" + Cellulare+"]";
 	}
 
 }

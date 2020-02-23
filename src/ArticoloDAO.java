@@ -97,7 +97,7 @@ public ArrayList<Articolo> getArticoloByID(String id) {
 		}
 		
 		
-		public void ModificaArticolo(String nome, String taglia, String colore, int scorte, double prezzo) {
+		public void ModificaArticolo(String nome, String taglia, String colore, int scorte, double prezzo, String ID) {
 			String query = "UPDATE articolo SET nome=?, taglia=?, colore=?, scorta=? , prezzo=? WHERE idarticolo=?";
 			try {
 				PreparedStatement pst = con.prepareStatement(query);
@@ -106,6 +106,7 @@ public ArrayList<Articolo> getArticoloByID(String id) {
 				pst.setString(3, colore);
 				pst.setInt(4, scorte);
 				pst.setDouble(5, prezzo);
+				pst.setString(6, ID);
 				pst.executeUpdate();
 			}catch(SQLException e) {e.printStackTrace();}
 		}

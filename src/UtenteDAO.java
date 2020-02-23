@@ -33,9 +33,8 @@ package negozio;
 						U.setNome(result.getString(2));
 						U.setCognome(result.getString(3));
 						U.setCellulare(result.getString(4));
-						U.setStatus(result.getBoolean(5));
-						U.setUsername(result.getString(6));
-						U.setPassword(result.getString(7));
+						U.setUsername(result.getString(5));
+						U.setPassword(result.getString(6));
 						au.add(U);
 					}
 					return au;
@@ -45,17 +44,16 @@ package negozio;
 		}
 		
 
-		public void AggiungiUtente(String nome, String cognome, String cellulare, boolean status, String username, String password){
-			String query = "INSERT INTO utente(nome, cognome, cellulare, status, username, password) VALUES (?,?,?,?,?,?)";
+		public void AggiungiUtente(String nome, String cognome, String cellulare, String username, String password){
+			String query = "INSERT INTO utente(nome, cognome, cellulare, username, password) VALUES (?,?,?,?,?,?)";
 			
 			try {
 				PreparedStatement pst = con.prepareStatement(query);
 				pst.setString(1, nome);
 				pst.setString(2, cognome);
 				pst.setString(3, cellulare);
-				pst.setBoolean(4, status);
-				pst.setString(5, username);
-				pst.setString(6, password);
+				pst.setString(4, username);
+				pst.setString(5, password);
 				pst.executeUpdate();
 			}catch(SQLException e) {e.printStackTrace();}
 		}
@@ -70,17 +68,16 @@ package negozio;
 			}catch (SQLException e) {e.printStackTrace();}
 		}
 
-		public void ModificaUtente(String nome, String cognome, String cellulare, boolean status, String username, String password) {
-			String query = "UPDATE utente SET nome=?, cognome=?, cellulare=?, status=? , username=?, password=? WHERE cellulare=?";
+		public void ModificaUtente(String nome, String cognome, String cellulare, String username, String password) {
+			String query = "UPDATE utente SET nome=?, cognome=?, cellulare=? , username=?, password=? WHERE cellulare=?";
 			try {
 				PreparedStatement pst = con.prepareStatement(query);
 				pst.setString(1, nome);
 				pst.setString(2, cognome);
 				pst.setString(3, cellulare);
-				pst.setBoolean(4, status);
-				pst.setString(5, username);
-				pst.setString(6, password);
-				pst.setString(7, cellulare);
+				pst.setString(4, username);
+				pst.setString(5, password);
+				pst.setString(6, cellulare);
 				pst.executeUpdate();
 			}catch(SQLException e) {e.printStackTrace();}
 		}
@@ -105,9 +102,8 @@ package negozio;
 						U.setNome(result.getString(2));
 						U.setCognome(result.getString(3));
 						U.setCellulare(result.getString(4));
-						U.setStatus(result.getBoolean(5));
-						U.setUsername(result.getString(6));
-						U.setPassword(result.getString(7));
+						U.setUsername(result.getString(5));
+						U.setPassword(result.getString(6));
 					}
 					return U;
 			}

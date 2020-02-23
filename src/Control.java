@@ -57,6 +57,7 @@ public class Control {
 	
 	
 	public void UtenteFrame() {
+		
 		UF.setVisible(true);
 		MostraUtenti();
 	}
@@ -64,10 +65,7 @@ public class Control {
 		SF.setVisible(true);
 		MostraArticoli();
 	}
-	public void MainframeAccess() {
-		mainFrame.setVisible(true);
-		LF.setVisible(false);
-	}
+
 	
 	/**
 	 * Funzione di login.
@@ -76,19 +74,23 @@ public class Control {
 		Utente UN;
 		UN =  UDAO.LoginDAO(username, password);
 		if(UN!=null) {
-			MainframeAccess();
+			MainframeAccess(UN);
 		}else {
 			JOptionPane.showMessageDialog(null,"Errore, credenziali invalide!!!");
 		}
 	}
 	
 	
+	public void MainframeAccess(Utente U) {
+		mainFrame.setVisible(true);
+		LF.setVisible(false);
+	}
+	
 	public void ErroreLogin() {
 		LF.ErroreLogIn();
 	}
 	
-	
-	
+
 	/**
 	 * Funzioni per l'articolo.
 	 */
@@ -171,12 +173,16 @@ public class Control {
 		ADAO.RimuoviArticolo(IDArticolo);
 	}
 	
-	public void ModificaArticolo(String nome, String taglia, String colore, String scorte, String prezzo) {
+	public void ModificaArticolo(String nome, String taglia, String colore, String scorte, String prezzo, String ID) {
 		int scorte1 = Integer.parseInt(scorte);
 		double prezzo1 = Double.parseDouble(prezzo);
-		ADAO.ModificaArticolo(nome, taglia, colore, scorte1, prezzo1 );
+		ADAO.ModificaArticolo(nome, taglia, colore, scorte1, prezzo1, ID );
 	}
-	
+	public void VendiArticolo(String nome, String taglia, String colore, int scorte, String prezzo, String ID, int vendita) {
+		scorte-=vendita;
+		double prezzo1 = Double.parseDouble(prezzo);
+		ADAO.ModificaArticolo(nome, taglia, colore, scorte, prezzo1, ID );
+	}
 	
 	/**
 	 * Funzioni per l'utente.
@@ -193,8 +199,8 @@ public class Control {
 	}
 	
 	
-	public void AggiungiUtentiLista(String nome, String Cognome, String Cellulare, boolean Status, String username, String password) {
-		UDAO.AggiungiUtente(nome, Cognome, Cellulare, Status, username, password);
+	public void AggiungiUtentiLista(String nome, String Cognome, String Cellulare, String username, String password) {
+		UDAO.AggiungiUtente(nome, Cognome, Cellulare, username, password);
 	}
 	
 	
@@ -208,9 +214,8 @@ public class Control {
 			row[1]=ListaUtenti.get(i).getNome();
 			row[2]=ListaUtenti.get(i).getCognome();
 			row[3]=ListaUtenti.get(i).getCellulare();
-			row[4]=ListaUtenti.get(i).getStatus();
-			row[5]=ListaUtenti.get(i).getUsername();
-			row[6]=ListaUtenti.get(i).getPassword();
+			row[4]=ListaUtenti.get(i).getUsername();
+			row[5]=ListaUtenti.get(i).getPassword();
 			model.addRow(row);
 		}	
 	}
@@ -224,9 +229,8 @@ public class Control {
 			row[1]=ListaUtenti.get(i).getNome();
 			row[2]=ListaUtenti.get(i).getCognome();
 			row[3]=ListaUtenti.get(i).getCellulare();
-			row[4]=ListaUtenti.get(i).getStatus();
-			row[5]=ListaUtenti.get(i).getUsername();
-			row[6]=ListaUtenti.get(i).getPassword();
+			row[4]=ListaUtenti.get(i).getUsername();
+			row[5]=ListaUtenti.get(i).getPassword();
 			model.addRow(row);
 		}	
 	}
@@ -240,9 +244,8 @@ public class Control {
 			row[1]=ListaUtenti.get(i).getNome();
 			row[2]=ListaUtenti.get(i).getCognome();
 			row[3]=ListaUtenti.get(i).getCellulare();
-			row[4]=ListaUtenti.get(i).getStatus();
-			row[5]=ListaUtenti.get(i).getUsername();
-			row[6]=ListaUtenti.get(i).getPassword();
+			row[4]=ListaUtenti.get(i).getUsername();
+			row[5]=ListaUtenti.get(i).getPassword();
 			model.addRow(row);
 		}	
 	}
@@ -251,8 +254,17 @@ public class Control {
 		UDAO.RimuoviUtente(IDUtente);
 	}
 	
-	public void ModificaUtente(String nome, String Cognome, String Cellulare, boolean Status, String Username, String password) {
-		UDAO.ModificaUtente(nome, Cognome, Cellulare, Status, Username, password);
+	public void ModificaUtente(String nome, String Cognome, String Cellulare, String Username, String password) {
+		UDAO.ModificaUtente(nome, Cognome, Cellulare, Username, password);
 	}
+
+
+	public void MainframeAccess() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	
 }
 

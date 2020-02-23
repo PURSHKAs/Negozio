@@ -3,6 +3,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,10 +16,10 @@ public class MainFrame extends JFrame {
 
 	private JPanel contentPane;
 	private Control TheController;
-
 	/**
 	 * Crazione del frame.
 	 */
+	
 	public MainFrame(Control c) {		
 		setType(Type.UTILITY);
 		TheController = c;
@@ -46,6 +48,7 @@ public class MainFrame extends JFrame {
 		JButton btnStore = new JButton("STORE");
 		btnStore.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				TheController.StoreButton();
 			}
 		});
@@ -55,8 +58,10 @@ public class MainFrame extends JFrame {
 		btnStore.setBounds(45, 82, 242, 74);
 		contentPane.add(btnStore);
 		
+		
 		/**
 		 * Bottone per UtentiFrame.
+		 
 		 */
 		JButton btnUtenti = new JButton("UTENTI");
 		btnUtenti.setFont(new Font("Dialog", Font.BOLD, 34));
@@ -64,7 +69,6 @@ public class MainFrame extends JFrame {
 		btnUtenti.setForeground(Color.WHITE);
 		btnUtenti.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				TheController.UtenteFrame();
 			}
 		});
@@ -72,4 +76,10 @@ public class MainFrame extends JFrame {
 		contentPane.add(btnUtenti);
 		
 	}
-}
+
+		
+			
+			
+		
+	}
+

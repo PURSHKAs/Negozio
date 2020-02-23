@@ -8,6 +8,7 @@ public class Articolo {
 	private int Scorte;
 	private double Prezzo;
 	
+	
 	public Articolo(String iDarticolo, String nome, String taglia, String colore, int scorte, double prezzo) {
 		setIDArticolo(iDarticolo);
 		setNome(nome);
@@ -80,5 +81,5 @@ public class Articolo {
 		String s = IDArticolo + " " +Nome+ " " +Taglia+ " " +Colore+ " " +Scorte+ " " +Prezzo;
 		return s;
 	}
-	
+
 }

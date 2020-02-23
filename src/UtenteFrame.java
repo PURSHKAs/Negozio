@@ -36,7 +36,6 @@ public class UtenteFrame extends JFrame {
 	private JTextField textFieldNome;
 	private JTextField textFieldCognome;
 	private JTextField textFieldCellulare;
-	private JTextField textFieldStatus;
 	private JTextField textFieldUsername;
 	private JTextField textFieldPassword;
 
@@ -74,16 +73,13 @@ public class UtenteFrame extends JFrame {
 				
 				DefaultTableModel model = (DefaultTableModel)table.getModel();
 				int selectedRowIndex = table.getSelectedRow();
-				String s =textFieldStatus.getText();
-				boolean a = Boolean.parseBoolean(s);
 				TheController.ModificaUtente(textFieldNome.getText(), textFieldCognome.getText(), 
-						textFieldCellulare.getText(),  a, textFieldUsername.getText(), textFieldPassword.getText());
+						textFieldCellulare.getText(), textFieldUsername.getText(), textFieldPassword.getText());
 				model.setRowCount(0);
 				TheController.MostraUtenti();
 				textFieldNome.setText("");
 				textFieldCognome.setText("");
 				textFieldCellulare.setText("");
-				textFieldStatus.setText("");
 				textFieldUsername.setText("");
 				textFieldPassword.setText("");
 			}
@@ -108,7 +104,6 @@ public class UtenteFrame extends JFrame {
 				textFieldNome.setText("");
 				textFieldCognome.setText("");
 				textFieldCellulare.setText("");
-				textFieldStatus.setText("");
 				textFieldUsername.setText("");
 				textFieldPassword.setText("");
 				btnRimuoviUtente.setEnabled(false);
@@ -128,16 +123,13 @@ public class UtenteFrame extends JFrame {
 		btnAggiungiUtente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel model = (DefaultTableModel)getTable().getModel();
-				String s =textFieldStatus.getText();
-				boolean a = Boolean.parseBoolean(s);
 				TheController.AggiungiUtentiLista(textFieldNome.getText(), textFieldCognome.getText(), 
-						textFieldCellulare.getText(),  a, textFieldUsername.getText(), textFieldPassword.getText());
+						textFieldCellulare.getText(), textFieldUsername.getText(), textFieldPassword.getText());
 				model.setRowCount(0);
 				TheController.MostraUtenti();
 				textFieldNome.setText("");
 				textFieldCognome.setText("");
 				textFieldCellulare.setText("");
-				textFieldStatus.setText("");
 				textFieldUsername.setText("");
 				textFieldPassword.setText("");
 			}
@@ -170,9 +162,8 @@ public class UtenteFrame extends JFrame {
 				textFieldNome.setText(model.getValueAt(selectedRowIndex, 1).toString());
 				textFieldCognome.setText(model.getValueAt(selectedRowIndex, 2).toString());
 				textFieldCellulare.setText(model.getValueAt(selectedRowIndex, 3).toString());
-				textFieldStatus.setText(model.getValueAt(selectedRowIndex, 4).toString());
-				textFieldUsername.setText(model.getValueAt(selectedRowIndex, 5).toString());
-				textFieldPassword.setText(model.getValueAt(selectedRowIndex, 6).toString());
+				textFieldUsername.setText(model.getValueAt(selectedRowIndex, 4).toString());
+				textFieldPassword.setText(model.getValueAt(selectedRowIndex, 5).toString());
 				btnRimuoviUtente.setEnabled(true);
 				btnAggiungiUtente.setEnabled(false);
 			}
@@ -183,7 +174,7 @@ public class UtenteFrame extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"IDUtente", "Nome", "Cognome", "Cellulare", "Status", "Username", "Password"
+				"IDUtente", "Nome", "Cognome", "Cellulare", "Username", "Password"
 			}
 		)
 		{public boolean isCellEditable(int row, int column) {return false;}});
@@ -301,11 +292,6 @@ public class UtenteFrame extends JFrame {
 		lblCellulare.setBounds(412, 185, 118, 14);
 		contentPane.add(lblCellulare);
 		
-		JLabel lblStatus = new JLabel("Status");
-		lblStatus.setForeground(Color.BLACK);
-		lblStatus.setBounds(412, 240, 118, 14);
-		contentPane.add(lblStatus);
-		
 		
 		textFieldNome = new JTextField();
 		textFieldNome.setBounds(479, 77, 96, 20);
@@ -322,30 +308,24 @@ public class UtenteFrame extends JFrame {
 		textFieldCellulare.setBounds(479, 179, 96, 20);
 		contentPane.add(textFieldCellulare);
 		
-		textFieldStatus = new JTextField();
-		textFieldStatus.setColumns(10);
-		textFieldStatus.setBounds(478, 234, 96, 20);
-		contentPane.add(textFieldStatus);
-		
 		
 		JLabel lblUsername = new JLabel("Username");
 		lblUsername.setForeground(Color.BLACK);
-		lblUsername.setBounds(412, 292, 70, 14);
+		lblUsername.setBounds(413, 232, 70, 14);
 		contentPane.add(lblUsername);
 		
 		textFieldUsername = new JTextField();
-		textFieldStatus.setColumns(10);
-		textFieldUsername.setBounds(478, 286, 96, 20);
+		textFieldUsername.setBounds(479, 226, 96, 20);
 		contentPane.add(textFieldUsername);
 		
 		
 		JLabel lblPassword = new JLabel("Password");
 		lblPassword.setForeground(Color.BLACK);
-		lblPassword.setBounds(412, 346, 70, 14);
+		lblPassword.setBounds(413, 286, 70, 14);
 		contentPane.add(lblPassword);
 		
 		textFieldPassword = new JTextField();
-		textFieldPassword.setBounds(478, 340, 96, 20);
+		textFieldPassword.setBounds(479, 280, 96, 20);
 		contentPane.add(textFieldPassword);
 		
 		
@@ -379,7 +359,7 @@ public class UtenteFrame extends JFrame {
 			}
 			
 			public void changed() {
-				if((textFieldNome.getText()).length()<3 || (textFieldStatus.getText()).length()<2) {
+				if((textFieldNome.getText()).length()<3 ){
 					btnModificaUtente.setEnabled(false);
 					btnAggiungiUtente.setEnabled(false);
 				}
@@ -389,9 +369,7 @@ public class UtenteFrame extends JFrame {
 				}
 			}
 		};
-		
 		textFieldNome.getDocument().addDocumentListener(docListener);
-		textFieldStatus.getDocument().addDocumentListener(docListener);
 		
 		
 		/**
@@ -404,7 +382,6 @@ public class UtenteFrame extends JFrame {
 				textFieldNome.setText("");
 				textFieldCognome.setText("");
 				textFieldCellulare.setText("");
-				textFieldStatus.setText("");
 				textFieldUsername.setText("");
 				btnRimuoviUtente.setEnabled(false);
 			}
