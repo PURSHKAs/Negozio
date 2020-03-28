@@ -1,4 +1,4 @@
-package negozio;
+package negozioFrame;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -21,6 +21,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+
+import negozio.Control;
+
 import java.awt.Font;
 import java.awt.Color;
 
@@ -82,6 +85,7 @@ public class UtenteFrame extends JFrame {
 				textFieldCellulare.setText("");
 				textFieldUsername.setText("");
 				textFieldPassword.setText("");
+				JOptionPane.showMessageDialog(null, "Utente modificato!!","", JOptionPane.ERROR_MESSAGE);
 			}
 		});
 		
@@ -132,6 +136,7 @@ public class UtenteFrame extends JFrame {
 				textFieldCellulare.setText("");
 				textFieldUsername.setText("");
 				textFieldPassword.setText("");
+				JOptionPane.showMessageDialog(null, "Utente aggiunto!!","", JOptionPane.ERROR_MESSAGE);
 			}
 		});
 		btnAggiungiUtente.setBounds(10, 457, 126, 43);

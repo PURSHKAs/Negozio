@@ -1,5 +1,9 @@
-package negozio;
+package negozioDAO;
 import java.util.*;
+
+import negozio.Articolo;
+import negozio.ListaArticoli;
+
 import java.sql.*;
 
 public class ListaArticoliDAO extends ListaArticoli{

@@ -1,6 +1,8 @@
-package negozio;
+package negozioDAO;
 	import java.sql.*;
 	import java.util.ArrayList;
+
+import negozio.Articolo;
 
 	public class ArticoloDAO extends Articolo{
 		
@@ -107,6 +109,15 @@ public ArrayList<Articolo> getArticoloByID(String id) {
 				pst.setInt(4, scorte);
 				pst.setDouble(5, prezzo);
 				pst.setString(6, ID);
+				pst.executeUpdate();
+			}catch(SQLException e) {e.printStackTrace();}
+		}
+		public void VendiArticolo( int scorte, String ID) {
+			String query = "UPDATE articolo SET scorta=? WHERE idarticolo=?";
+			try {
+				PreparedStatement pst = con.prepareStatement(query);
+				pst.setInt(1, scorte);
+				pst.setString(2, ID);
 				pst.executeUpdate();
 			}catch(SQLException e) {e.printStackTrace();}
 		}

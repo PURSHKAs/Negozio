@@ -1,4 +1,4 @@
-package negozio;
+package negozioFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -19,6 +19,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+
+import negozio.Control;
+
 import java.awt.Font;
 import java.awt.Color;
 
@@ -79,6 +82,7 @@ public class StoreFrame extends JFrame {
 				textFieldTaglia.setText("");
 				textFieldColore.setText("");
 				textFieldScorte.setText("");
+				JOptionPane.showMessageDialog(null, "Articolo modificato!!","", JOptionPane.ERROR_MESSAGE);
 			}
 		});
 		
@@ -122,6 +126,7 @@ public class StoreFrame extends JFrame {
 						textFieldColore.getText(), textFieldScorte.getText(), textFieldPrezzo.getText());
 				model.setRowCount(0);
 				TheController.MostraArticoli();
+				JOptionPane.showMessageDialog(null, "Articolo aggiunto!!","", JOptionPane.ERROR_MESSAGE);
 				textFieldNome.setText("");
 				textFieldTaglia.setText("");
 				textFieldColore.setText("");
@@ -245,9 +250,10 @@ public class StoreFrame extends JFrame {
 		btnTermina.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
+				TheController.MainframeAccess();
 			}
 		});
-		btnTermina.setBounds(433, 416, 126, 43);
+		btnTermina.setBounds(473, 401, 126, 58);
 		contentPane.add(btnTermina);
 		
 		/**
@@ -337,24 +343,37 @@ public class StoreFrame extends JFrame {
 		lblQuantit.setBounds(141, 386, 54, 16);
 		contentPane.add(lblQuantit);
 		
-		JButton btnVenduto = new JButton("Venduto");
+		JButton btnVenduto = new JButton("Vendi");
+		btnVenduto.setForeground(Color.BLACK);
+		btnVenduto.setBackground(Color.RED);
+		btnVenduto.setBounds(306, 381, 99, 26);
+		btnVenduto.setEnabled(false);
 		btnVenduto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				DefaultTableModel model = (DefaultTableModel)table.getModel();
 				int selectedRowIndex = table.getSelectedRow();
-				int tmp =Integer.parseInt(textFieldScorte.getText());
-				int tmp1=Integer.parseInt(textField_1.getText());
-				TheController.VendiArticolo(textFieldNome.getText(), textFieldTaglia.getText(), 
-						textFieldColore.getText(),tmp, textFieldPrezzo.getText(),(String) ( model.getValueAt(selectedRowIndex, 0) ), tmp1);
+				int tmp=0;
+				int tmp1=0;
+				try {
+					tmp =Integer.parseInt(textFieldScorte.getText());
+				 	tmp1=Integer.parseInt(textField_1.getText());
+				 	TheController.VendiArticolo(tmp, (String) ( model.getValueAt(selectedRowIndex, 0) ), tmp1);
+				 	JOptionPane.showMessageDialog(null, "Articolo venduto!!","", JOptionPane.ERROR_MESSAGE);
+				}
+				catch(NumberFormatException eq) 
+					{ 
+						Errore();
+					}
+				
 				model.setRowCount(0);
 				TheController.MostraArticoli();
 				textField_1.setText("");
+				btnVenduto.setEnabled(false);
+				
 			}
 		});
-		btnVenduto.setForeground(Color.BLACK);
-		btnVenduto.setBackground(Color.RED);
-		btnVenduto.setBounds(306, 381, 99, 26);
+
 		contentPane.add(btnVenduto);
 		
 		
@@ -384,7 +403,7 @@ public class StoreFrame extends JFrame {
 				if((textFieldNome.getText()).length()<3 || (textFieldScorte.getText()).length()<1) {
 					btnModificaArticolo.setEnabled(false);
 					btnAggiungiArticolo.setEnabled(false);
-				}
+				}	
 				else {
 					btnModificaArticolo.setEnabled(true);
 					btnAggiungiArticolo.setEnabled(true);
@@ -392,6 +411,34 @@ public class StoreFrame extends JFrame {
 			}
 		};
 		
+		DocumentListener docListener1 = new DocumentListener() {
+			
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				changed1();				
+			}
+			
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				changed1();				
+			}
+			
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				changed1();				
+			}
+			
+			public void changed1() {
+				if(textField_1.getText().length()<1 ) {
+					btnVenduto.setEnabled(false);
+				}	
+				else {
+					btnVenduto.setEnabled(true);
+				}
+			}
+		};
+		
+		textField_1.getDocument().addDocumentListener(docListener1);
 		textFieldNome.getDocument().addDocumentListener(docListener);
 		textFieldScorte.getDocument().addDocumentListener(docListener);
 		
@@ -409,10 +456,14 @@ public class StoreFrame extends JFrame {
 				textFieldScorte.setText("");
 				textFieldPrezzo.setText("");
 				btnRimuoviArticolo.setEnabled(false);
+				btnVenduto.setEnabled(false);
 			}
 		});
 	}
 	
+	public void Errore() {
+		JOptionPane.showMessageDialog(null, "INSERIRE VALORI CORRETTI","ERRORE", JOptionPane.ERROR_MESSAGE);
+	}
 	public JTable getTable() {
 		return table;
 	}

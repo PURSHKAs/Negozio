@@ -1,6 +1,8 @@
-package negozio;
+package negozioDAO;
 	import java.sql.*;
 	import java.util.ArrayList;
+
+import negozio.Utente;
 
 	public class UtenteDAO extends Utente{
 		
@@ -45,7 +47,7 @@ package negozio;
 		
 
 		public void AggiungiUtente(String nome, String cognome, String cellulare, String username, String password){
-			String query = "INSERT INTO utente(nome, cognome, cellulare, username, password) VALUES (?,?,?,?,?,?)";
+			String query = "INSERT INTO utente(nome, cognome, cellulare, username, password) VALUES (?,?,?,?,?)";
 			
 			try {
 				PreparedStatement pst = con.prepareStatement(query);
@@ -72,12 +74,11 @@ package negozio;
 			String query = "UPDATE utente SET nome=?, cognome=?, cellulare=? , username=?, password=? WHERE cellulare=?";
 			try {
 				PreparedStatement pst = con.prepareStatement(query);
-				pst.setString(1, nome);
-				pst.setString(2, cognome);
-				pst.setString(3, cellulare);
-				pst.setString(4, username);
-				pst.setString(5, password);
-				pst.setString(6, cellulare);
+				pst.setString(2, nome);
+				pst.setString(3, cognome);
+				pst.setString(4, cellulare);
+				pst.setString(5, username);
+				pst.setString(6, password);
 				pst.executeUpdate();
 			}catch(SQLException e) {e.printStackTrace();}
 		}

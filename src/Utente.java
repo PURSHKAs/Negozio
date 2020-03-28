@@ -14,7 +14,6 @@ public class Utente {
 		
 	}
 	
-
 	public Utente(String iDUtente, String nome, String cognome, String cellulare, String username, String password) {
 		super();
 		setIDUtente(iDUtente);
@@ -23,9 +22,7 @@ public class Utente {
 		setCellulare(cellulare);
 		setUsername(username);
 		setPassword(password);
-		
 	}
-
 
 
 
@@ -66,6 +63,7 @@ public class Utente {
 	public void setPassword(String password) {
 		Password = password;
 	}
+	
 	@Override
 	public String toString() {
 		return "Utente [IDUtente=" + IDUtente + ", Nome=" + Nome + ", Cognome=" + Cognome + ", Cellulare=" + Cellulare+"]";

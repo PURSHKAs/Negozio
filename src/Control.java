@@ -5,6 +5,15 @@ import java.util.*;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import negozioDAO.ArticoloDAO;
+import negozioDAO.ListaArticoliDAO;
+import negozioDAO.ListaUtentiDAO;
+import negozioDAO.UtenteDAO;
+import negozioFrame.LoginFrame;
+import negozioFrame.MainFrame;
+import negozioFrame.StoreFrame;
+import negozioFrame.UtenteFrame;
 public class Control {
 	
 	
@@ -24,7 +33,7 @@ public class Control {
 	UtenteDAO UDAO;
 	ListaUtentiDAO LUDAO;
 	LoginFrame LF;
-	Utente U;
+	Utente U = new Utente();
 	
 	/**
 	 * Costruttore.
@@ -59,13 +68,18 @@ public class Control {
 	public void UtenteFrame() {
 		
 		UF.setVisible(true);
+		mainFrame.setVisible(false);
 		MostraUtenti();
 	}
 	public void StoreButton() {
 		SF.setVisible(true);
+		mainFrame.setVisible(false);
 		MostraArticoli();
 	}
 
+	public void MainframeAccess() {
+		mainFrame.setVisible(true);
+	}
 	
 	/**
 	 * Funzione di login.
@@ -74,16 +88,10 @@ public class Control {
 		Utente UN;
 		UN =  UDAO.LoginDAO(username, password);
 		if(UN!=null) {
-			MainframeAccess(UN);
+			MainframeAccess();
 		}else {
 			JOptionPane.showMessageDialog(null,"Errore, credenziali invalide!!!");
 		}
-	}
-	
-	
-	public void MainframeAccess(Utente U) {
-		mainFrame.setVisible(true);
-		LF.setVisible(false);
 	}
 	
 	public void ErroreLogin() {
@@ -178,11 +186,19 @@ public class Control {
 		double prezzo1 = Double.parseDouble(prezzo);
 		ADAO.ModificaArticolo(nome, taglia, colore, scorte1, prezzo1, ID );
 	}
-	public void VendiArticolo(String nome, String taglia, String colore, int scorte, String prezzo, String ID, int vendita) {
+	public void VendiArticolo(int scorte, String ID, int vendita) {
 		scorte-=vendita;
-		double prezzo1 = Double.parseDouble(prezzo);
-		ADAO.ModificaArticolo(nome, taglia, colore, scorte, prezzo1, ID );
+		if(scorte>=0)
+			{
+				ADAO.VendiArticolo( scorte, ID );
+			}
+		else
+			{
+				SF.Errore();
+			}
 	}
+	
+	
 	
 	/**
 	 * Funzioni per l'utente.
@@ -257,9 +273,13 @@ public class Control {
 	public void ModificaUtente(String nome, String Cognome, String Cellulare, String Username, String password) {
 		UDAO.ModificaUtente(nome, Cognome, Cellulare, Username, password);
 	}
+	
+	public Utente getUtente() {
+		return U;
+	}
 
 
-	public void MainframeAccess() {
+	public void MainframeAccess1() {
 		// TODO Auto-generated method stub
 		
 	}

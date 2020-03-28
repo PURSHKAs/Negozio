@@ -1,4 +1,4 @@
-package negozio;
+package negozioFrame;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -7,6 +7,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
+
+import negozio.Control;
+import negozioDAO.UtenteDAO;
+
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JTextField;
@@ -57,6 +61,7 @@ public class LoginFrame extends JFrame {
 					e1.printStackTrace();
 					
 				}
+				setVisible(false);
 
 		}});
 		btnLogin.setFont(new Font("Dialog", Font.BOLD, 38));
